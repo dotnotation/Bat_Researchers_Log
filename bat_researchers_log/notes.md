@@ -13,6 +13,7 @@ Bats
     - attributes
         - tag/wing print number/ identification number (string) maybe slug? :identification
         - nickname? (string) maybe slug?
+        - user_id
         - species (string)
         - date found (datetime)
         - timestamps null: false
