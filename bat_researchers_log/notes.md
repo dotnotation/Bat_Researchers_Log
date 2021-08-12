@@ -6,14 +6,16 @@ Users
         - email (string)
         - password (string)
         - organization (string)
+        - timestamps null: false
 
 Bats
     - belongs_to users
     - attributes
-        - tag/wing print number (string) maybe slug?
+        - tag/wing print number/ identification number (string) maybe slug? :identification
         - nickname? (string) maybe slug?
         - species (string)
         - date found (datetime)
+        - timestamps null: false
         - weight (integer)
         - colony size (integer)
         - wing span (integer)
