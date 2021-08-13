@@ -22,7 +22,7 @@ Bats
         - wing span (integer)
         - location found (string)
         - date last seen (datetime)
-        - endangerment status (string)
+        - conservation status (string)
         - white-nose syndrome (boolean possible radio button) 
         - notes (string, textarea)
 
