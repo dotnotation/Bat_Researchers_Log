@@ -1,6 +1,7 @@
 class BatsController < ApplicationController
 
     get '/bats' do
+        @bats = Bats.all
         erb :'/bats/index'
     end
 
@@ -9,19 +10,41 @@ class BatsController < ApplicationController
     end
 
     post '/bats' do
+        @bat = current_user.bats.build(params[:bat])
+        if @bat.save
+            redirect to "/bats/#{@bat.slug}"
+        else
+            redirect to "/bats"
+        end
     end
 
-    get '/bats/:id' do
+    get '/bats/:slug' do
+        @bat = Bat.find_by_bat_slug(params[:slug])
         erb :'/bats/show'
     end
 
-    get '/bats/:id/edit' do
-        erb :'/bats/edit'
+    get '/bats/:slug/edit' do
+        @bat = Bat.find_by_bat_slug(params[:slug])
+        if @bat.user_id == session[:user_id]
+            erb :'/bats/edit'
+        else
+            redirect to "/bats"
+        end
     end
 
-    patch '/bats/:id' do
+    patch '/bats/:slug' do
+        @bat = Bat.find_by_bat_slug(params[:slug])
+        if @bat.update(params[:bat])
+            redirect to "/bats/#{@bat.slug}"
+        else
+            redirect to "/bats/#{@bat.slug}/edit"
+        end
     end
 
-    delete '/bats/:id' do
+    delete '/bats/:slug' do
+        @bat = Bat.find_by_bat_slug(params[:slug])
+        @bat.destroy
+
+        redirect to "/bats"
     end
 end
