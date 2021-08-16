@@ -21,13 +21,13 @@ class UsersController < ApplicationController
     end
 
     post '/login' do
-        user = User.find_by(username: params[:user][:username])
+        user = User.find_by(:username => params[:username])
 
-        if user && user.authenticate(params[:user][:password])
-            session[:user_id] = user.id
-            redirect to "/bats"
+        if user && user.authenticate(params[:password])
+          session[:user_id] = user.id 
+          redirect to "/bats"
         else
-            redirect to "/login"
+          redirect to "/signup"
         end
     end
 
@@ -38,22 +38,35 @@ class UsersController < ApplicationController
 
     get '/user/:slug/edit' do
         @user = User.find_by_slug(params[:slug])
-        if @user.id == session[:user_id]
-            @user.update(params[:user])
+        redirect_if_not_authorized(@user)
             erb :'/users/edit'
-        else
-            redirect to "/user/:slug"
-        end
     end
 
     patch '/user/:slug' do
-        @user = User.find_by_slug(params[:slug])
-        @user.update(params[:user])
-        if @user.save
-            redirect to "/user/#{@user.slug}"
+        user = User.find_by_slug(params[:slug])
+        user.username = params[:username]
+        user.email = params[:email]
+        user.organization = params[:organization]
+        user.password = params[:password]
+        if user.save
+            redirect to "/user/#{user.slug}"
         else
-            redirect to "/user/#{@user.slug/edit}"
+            redirect to "/user/#{user.slug}/edit"
         end
+    end
+
+    get '/user/:slug/delete' do
+        redirect_if_not_authorized(User.find_by_slug(params[:slug]))
+        @user = User.find_by_slug(params:slug)
+        erb :'users/delete'
+    end
+
+    delete '/user/:slug' do
+        redirect_if_not_authorized(User.find_by_slug(params[:slug]))
+        user = User.find_by_slug(params[:slug])
+        user.destroy
+        session.delete(:user_id)
+        redirect to "/"
     end
 
     delete '/logout' do

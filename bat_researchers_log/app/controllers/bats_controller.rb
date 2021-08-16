@@ -6,25 +6,43 @@ class BatsController < ApplicationController
     end
 
     get '/bats/new' do
+        redirect_if_not_logged_in
         erb :'/bats/new'
     end
 
     post '/bats' do
+        # @bat = Bat.create(identification: params[:identification],
+        #                                 nickname: params[:nickname],
+        #                                 species: params[:species],
+        #                                 date_found: params[:date_found],
+        #                                 location: params[:location],
+        #                                 date_last_seen: params[:date_last_seen],
+        #                                 weight: params[:weight],
+        #                                 age: params[:age],
+        #                                 sex: params[:sex],
+        #                                 wing_span: params[:wing_span],
+        #                                 colony_size: params[:colony_size],
+        #                                 conservation_status: params[:conservation_status],
+        #                                 white_nose_syndrome: params[:white_nose_syndrome],
+        #                                 notes: params[:notes],
+        #                                 user_id: current_user.id)
         @bat = current_user.bats.build(params[:bat])
         if @bat.save
-            redirect to "/bats/#{@bat.slug}"
+            flash[:message] = "Bat successfully created."
+            redirect to "/bats/#{@bat.bat_slug}"
         else
             redirect to "/bats"
         end
     end
 
     get '/bats/:slug' do
-        @bat = Bat.find_by_bat_slug(params[:slug])
+        find_bat
         erb :'/bats/show'
     end
 
     get '/bats/:slug/edit' do
-        @bat = Bat.find_by_bat_slug(params[:slug])
+        redirect_if_not_authorized
+        find_bat
         if @bat.user_id == session[:user_id]
             erb :'/bats/edit'
         else
@@ -33,18 +51,24 @@ class BatsController < ApplicationController
     end
 
     patch '/bats/:slug' do
-        @bat = Bat.find_by_bat_slug(params[:slug])
+        find_bat
         if @bat.update(params[:bat])
-            redirect to "/bats/#{@bat.slug}"
+            redirect to "/bats/#{@bat.bat_slug}"
         else
-            redirect to "/bats/#{@bat.slug}/edit"
+            redirect to "/bats/#{@bat.bat_slug}/edit"
         end
     end
 
     delete '/bats/:slug' do
-        @bat = Bat.find_by_bat_slug(params[:slug])
+        find_bat
         @bat.destroy
 
         redirect to "/bats"
+    end
+
+    private
+    
+    def find_bat
+        @bat = Bat.find_by_bat_slug(params[:bat_slug]) 
     end
 end

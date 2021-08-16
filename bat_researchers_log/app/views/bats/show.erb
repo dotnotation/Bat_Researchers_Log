@@ -14,9 +14,11 @@ Presence of White Nose Syndrom: <%= @bat.white_nose_syndrome %><br>
 Updated at: <%= @bat.updated_at %><br>
 Notes: <%= @bat.notes %><br>
 
-<a class="button" href="/bats/<%= @bat.bat_slug %>/edit">Edit Bat</a>
+<% if logged_in? && current_user.id == @bat.user_id %>
+    <a class="button" href="/bats/<%= @bat.bat_slug %>/edit">Edit Bat</a>
 
-<form action="/bats/<%= @bat.bat_slug %>/delete" method="post">
-    <input id ="hidden" type="hidden" name="_method" value="DELETE">
-    <input type="submit" value="Delete Bat">
-</form>
+    <form action="/bats/<%= @bat.bat_slug %>/delete" method="post">
+        <input id ="hidden" type="hidden" name="_method" value="DELETE">
+        <input type="submit" value="Delete Bat">
+    </form>
+<% end %>

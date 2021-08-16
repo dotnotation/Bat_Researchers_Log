@@ -1,0 +1,18 @@
+<h3><%= @user.username %></h3>
+Email: <%= @user.email %><br>
+Organization: <%= @user.organization %><br>
+Bats: 
+    <ol>
+        <% @user.bats.all.each do |bat| %>
+            <li><a class="button" href="/bats/<%= bat.bat_slug %>"> <%= bat.identification %></a></li>
+        <% end %>
+    </ol>
+
+<% if logged_in? && current_user.id == @user.id %>
+    <a class="button" href="/user/<%= @user.slug %>/edit">Edit Your Account</a>
+
+    <form action="/user/<%= @user.slug %>/delete" method="post">
+        <input id ="hidden" type="hidden" name="_method" value="DELETE">
+        <input type="submit" value="Delete Your Account">
+    </form>
+<% end %>

@@ -1,0 +1,19 @@
+<h1>Edit Your Account</h1>
+<form action="/user/<%= @user.slug %>" method="post">
+    <input id="hidden" type="hidden" name="_method" value="PATCH">
+
+    <label>Username: </label>
+    <input type="text" name="username" value="<%= @user.username %>">
+
+    <label>Email: </label>
+    <input type="email" name="email" value="<%= @user.email %>">
+
+    <label>Organization: </label>
+    <input type="text" name="organization" value="<%= @user.organization %>">
+
+    <label>Password: </label>
+    <input type="password" name="password" value="<%= @user.password %>">
+
+
+    <input type="submit" value="Update Account">
+</form>
