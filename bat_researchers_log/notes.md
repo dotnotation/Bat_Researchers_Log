@@ -55,6 +55,7 @@ Pages/Routes
         - if current_user edit button
         - button to all current_user bats to logged_in? users
             - if not logged_in? redirect to login
+        - maybe show all of this users bats?
         - get and post request
     - bats/index (All Bats)
         - ordered list of all bats
@@ -82,3 +83,5 @@ Nav Bar
         - home
         - account
         - search
+
+-Watch out for using nested forms vs. regular forms

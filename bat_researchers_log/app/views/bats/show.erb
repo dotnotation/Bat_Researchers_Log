@@ -1,0 +1,22 @@
+<h3><%= @bat.identification %></h3>
+Nickname: <%= @bat.nickname %><br>
+Species: <%= @bat.species %><br>
+Date Found: <%= @bat.date_found %><br>
+Location: <%= @bat.location %><br>
+Date Last Seen: <%= @bat.date_last_seen %><br>
+Weight In Grams: <%= @bat.weight %><br>
+Age In Years: <%= @bat.age %><br>
+Sex: <%= @bat.sex %><br>
+Wing Span In CM: <%= @bat.wing_span %><br>
+Colony Size: <%= @bat.colony_size %><br>
+Conservation Status: <%= @bat.conservation_status %><br>
+Presence of White Nose Syndrom: <%= @bat.white_nose_syndrome %><br>
+Updated at: <%= @bat.updated_at %><br>
+Notes: <%= @bat.notes %><br>
+
+<a class="button" href="/bats/<%= @bat.bat_slug %>/edit">Edit Bat</a>
+
+<form action="/bats/<%= @bat.bat_slug %>/delete" method="post">
+    <input id ="hidden" type="hidden" name="_method" value="DELETE">
+    <input type="submit" value="Delete Bat">
+</form>

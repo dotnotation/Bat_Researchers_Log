@@ -1,7 +1,7 @@
 class BatsController < ApplicationController
 
     get '/bats' do
-        @bats = Bats.all
+        @bats = Bat.all
         erb :'/bats/index'
     end
 

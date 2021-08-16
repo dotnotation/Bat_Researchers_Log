@@ -8,6 +8,6 @@ class Bat < ActiveRecord::Base
     end
 
     def self.find_by_bat_slug(bat_slug)
-        Bat.all.find{|bat| bat.slug == bat_slug}
+        Bat.all.find{|bat| bat.bat_slug == bat_slug}
     end
 end
