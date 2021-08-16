@@ -3,16 +3,16 @@
     <input id="hidden" type="hidden" name="_method" value="PATCH">
 
     <label>Username: </label>
-    <input type="text" name="username" value="<%= @user.username %>">
+    <input type="text" name="user[username]" value="<%= @user.username %>">
 
     <label>Email: </label>
-    <input type="email" name="email" value="<%= @user.email %>">
+    <input type="email" name="user[email]" value="<%= @user.email %>">
 
     <label>Organization: </label>
-    <input type="text" name="organization" value="<%= @user.organization %>">
+    <input type="text" name="user[organization]" value="<%= @user.organization %>">
 
     <label>Password: </label>
-    <input type="password" name="password" value="<%= @user.password %>">
+    <input type="password" name="user[password]" value="<%= @user.password %>">
 
 
     <input type="submit" value="Update Account">

@@ -31,24 +31,24 @@ class BatsController < ApplicationController
 
         if bat.save
             flash[:message] = "Bat successfully created."
-            redirect to "/bats/#{bat.id}"
+            redirect to "/bats/#{bat.identification}"
         else
             flash[:error] = "#{bat.errors.full_messages.join(", ")}"
             redirect to "/bats"
         end
     end
 
-    get '/bats/:id' do
+    get '/bats/:identification' do
         bat_authorization
         erb :'bats/show'
     end
 
-    get '/bats/:slug' do
-        find_bat
-        erb :'/bats/show'
-    end
+    # get '/bats/:slug' do
+    #     find_bat
+    #     erb :'/bats/show'
+    # end
 
-    get '/bats/:slug/edit' do
+    get '/bats/:identification/edit' do
         find_bat
         if @bat.user_id == session[:user_id]
             erb :'/bats/edit'
@@ -57,16 +57,16 @@ class BatsController < ApplicationController
         end
     end
 
-    patch '/bats/:slug' do
+    patch '/bats/:identification' do
         find_bat
         if @bat.update(params[:bat])
-            redirect to "/bats/#{@bat.bat_slug}"
+            redirect to "/bats/#{@bat.identification}"
         else
-            redirect to "/bats/#{@bat.bat_slug}/edit"
+            redirect to "/bats/#{@bat.identification}/edit"
         end
     end
 
-    delete '/bats/:slug' do
+    delete '/bats/:identification' do
         find_bat
         @bat.destroy
 
@@ -74,14 +74,12 @@ class BatsController < ApplicationController
     end
 
     private
-
-    def find_bat
-        @bat = Bat.find_by_bat_slug(params[:bat_slug]) 
-    end
-    
+   
     def bat_authorization
-        @bat = Bat.find_by_id(params[:id]) 
+        @bat = Bat.find_by(identification: params[:identification]) 
+        binding.pry
         if @bat.user_id != session[:user_id]
+        
             redirect "/bats"
         end
     end
