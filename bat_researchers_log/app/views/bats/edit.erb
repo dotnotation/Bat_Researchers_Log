@@ -1,0 +1,48 @@
+<h1>Edit Bat Details</h1>
+<form action="/bats/<%= @bat.bat_slug %>" method="post">
+    <input id="hidden" type="hidden" name="_method" value="PATCH">
+
+    <label>Identification Number(either tag or wing print): </label>
+    <input type="text" name="identification" value="<%= @bat.identification %>">
+    
+    <label>Nickname: </label>
+    <input type="text" name="nickname" value="<%= @bat.nickname %>">
+
+    <label>Species: </label>
+    <input type="text" name="species" value="<%= @bat.species %>"><br>
+
+    <label>Date Found: </label>
+    <input type="text" name="date_found" value="<%= @bat.date_found %>"><br>
+    
+    <label>Location: </label>
+    <input type="text" name="location" value="<%= @bat.location %>"><br>
+
+    <label>Date Last Seen: </label>
+    <input type="text" name="date_last_seen" value="<%= @bat.date_last_seen %>"><br>
+
+    <label>Weight In Grams: </label>
+    <input type="text" name="weight" value="<%= @bat.weight %>"><br>
+
+    <label>Age In Years: </label>
+    <input type="text" name="age" value="<%= @bat.age %>"><br>
+
+    <label>Sex: </label>
+    <input type="text" name="sex" value="<%= @bat.sex %>"><br>
+
+    <label>Wing Span In CM: </label>
+    <input type="text" name="wing_span" value="<%= @bat.wing_span %>"><br>
+
+    <label>Colony Size: </label>
+    <input type="text" name="colony_size" value="<%= @bat.colony_size %>"><br>
+
+    <label>Conservation Status: </label>
+    <input type="text" name="conservation_status" value="<%= @bat.conservation_status %>"><br>
+
+    <label>Presence of White Nose Syndrome (true/false): </label>
+    <input type="text" name="white_nose_syndrome" value="<%= @bat.white_nose_syndrome %>"><br>
+
+    <label>Notes: </label>
+    <textarea type="text" name="notes" value="<%= @bat.notes %>"></textarea><br>
+    
+    <input type="submit" value="submit">
+</form>

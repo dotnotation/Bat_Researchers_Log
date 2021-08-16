@@ -1,0 +1,10 @@
+<h1>Welcome <%= current_user.username %></h1>
+<h2>Recorded Bats:</h2>
+    <ol>
+        <% @bats.each do |bat| %>
+            <li><a href="/bats/<%= bat.bat_slug %>"><%= bat.identification %></a></li>
+        <% end %>
+    </ol>
+
+<a class="button" href="/">Home</a>
+<a class="button" href="/bats/new">Log New Bat</a>
