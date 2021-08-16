@@ -8,26 +8,10 @@ class UsersController < ApplicationController
     post '/signup' do
         user = User.new(params[:user])
         if user.save
-            session[user_id] = user.id 
+            session[:user_id] = user.id 
             redirect to "/bats"
         else
             redirect to "/signup"
-        end
-    end
-
-    get '/login' do
-        redirect_if_logged_in
-        erb :'/users/login'
-    end
-
-    post '/login' do
-        user = User.find_by(:username => params[:username])
-
-        if user && user.authenticate(params[:password])
-          session[:user_id] = user.id 
-          redirect to "/bats"
-        else
-          redirect to "/signup"
         end
     end
 
@@ -69,8 +53,4 @@ class UsersController < ApplicationController
         redirect to "/"
     end
 
-    delete '/logout' do
-        session.delete(:user_id)
-        redirect to "/login"
-    end
 end

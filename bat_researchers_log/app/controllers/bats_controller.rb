@@ -26,13 +26,21 @@ class BatsController < ApplicationController
         #                                 white_nose_syndrome: params[:white_nose_syndrome],
         #                                 notes: params[:notes],
         #                                 user_id: current_user.id)
-        @bat = current_user.bats.build(params[:bat])
-        if @bat.save
+        bat = current_user.bats.build(params[:bat])
+        #binding.pry
+
+        if bat.save
             flash[:message] = "Bat successfully created."
-            redirect to "/bats/#{@bat.bat_slug}"
+            redirect to "/bats/#{bat.id}"
         else
+            flash[:error] = "#{bat.errors.full_messages.join(", ")}"
             redirect to "/bats"
         end
+    end
+
+    get '/bats/:id' do
+        bat_authorization
+        erb :'bats/show'
     end
 
     get '/bats/:slug' do
@@ -41,7 +49,6 @@ class BatsController < ApplicationController
     end
 
     get '/bats/:slug/edit' do
-        redirect_if_not_authorized
         find_bat
         if @bat.user_id == session[:user_id]
             erb :'/bats/edit'
@@ -67,8 +74,15 @@ class BatsController < ApplicationController
     end
 
     private
-    
+
     def find_bat
         @bat = Bat.find_by_bat_slug(params[:bat_slug]) 
+    end
+    
+    def bat_authorization
+        @bat = Bat.find_by_id(params[:id]) 
+        if @bat.user_id != session[:user_id]
+            redirect "/bats"
+        end
     end
 end
