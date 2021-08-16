@@ -39,7 +39,7 @@ class BatsController < ApplicationController
     end
 
     get '/bats/:identification' do
-        bat_authorization
+        @bat = Bat.find_by(identification: params[:identification]) 
         erb :'bats/show'
     end
 
@@ -49,7 +49,7 @@ class BatsController < ApplicationController
     # end
 
     get '/bats/:identification/edit' do
-        find_bat
+        bat_authorization
         if @bat.user_id == session[:user_id]
             erb :'/bats/edit'
         else
@@ -58,7 +58,7 @@ class BatsController < ApplicationController
     end
 
     patch '/bats/:identification' do
-        find_bat
+        bat_authorization
         if @bat.update(params[:bat])
             redirect to "/bats/#{@bat.identification}"
         else
@@ -66,8 +66,8 @@ class BatsController < ApplicationController
         end
     end
 
-    delete '/bats/:identification' do
-        find_bat
+    delete '/bats/:identification/delete' do
+        bat_authorization
         @bat.destroy
 
         redirect to "/bats"
@@ -77,7 +77,7 @@ class BatsController < ApplicationController
    
     def bat_authorization
         @bat = Bat.find_by(identification: params[:identification]) 
-        binding.pry
+        #binding.pry
         if @bat.user_id != session[:user_id]
         
             redirect "/bats"
