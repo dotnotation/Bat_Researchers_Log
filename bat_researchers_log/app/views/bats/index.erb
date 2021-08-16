@@ -1,4 +1,7 @@
-<h1>Welcome </h1>
+<h1>Welcome 
+    <% if logged_in? %>
+        <%= current_user.username %>
+        <% end %> </h1>
 <h2>Recorded Bats:</h2>
     <ol>
         <% @bats.each do |bat| %>
