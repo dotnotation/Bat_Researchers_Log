@@ -9,10 +9,6 @@ Bats:
     </ol>
 
 <% if logged_in? && current_user.id == @user.id %>
-    <a class="button" href="/user/<%= @user.slug %>/edit">Edit Your Account</a>
-
-    <form action="/user/<%= @user.slug %>/delete" method="post">
-        <input id ="hidden" type="hidden" name="_method" value="DELETE">
-        <input type="submit" value="Delete Your Account">
-    </form>
+    <a class="btn btn-warning btn-sm active" href="/user/<%= @user.slug %>/edit">Edit Your Account</a><br><br>
+    <a class="btn btn-danger btn-sm active" href="/user/<%= @user.slug %>/delete">Delete Your Account</a>
 <% end %>

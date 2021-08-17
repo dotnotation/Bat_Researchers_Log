@@ -24,47 +24,57 @@
             <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <% if logged_in? %>
+                      <li class="nav-item">
+                      <a class="nav-link active fs-4 " aria-current="page" href="/user/<%= current_user.slug %>">Account</a>
+                      </li>
+                      <li class="nav-item">
+                      <a class="nav-link active fs-4" href="/bats">All Bats</a>
+                      </li>
+                      <li class="nav-item">
+                      <a class="nav-link active fs-4" href="/bats/new">Log New Bat</a>
+                      </li>
+                      
+                  <% else %>
+                      <li class="nav-item">
+                      <a class="nav-link active fs-4" href="/signup">Sign Up</a>
+                      </li>
+                      <li class="nav-item">
+                      <a class="nav-link active fs-4" href="/login">Log In</a>
+                      </li>
+                  <% end%>
+              </ul>
                 <% if logged_in? %>
-                    <li class="nav-item">
-                    <a class="nav-link active fs-4 " aria-current="page" href="/user/<%= current_user.slug %>">Account</a>
-                    </li>
-                    <li class="nav-item">
-                    <a class="nav-link active fs-4" href="/bats">All Bats</a>
-                    </li>
-                    <li class="nav-item">
-                    <a class="nav-link active fs-4" href="/bats/new">Log New Bat</a>
-                    </li>
-                    <li class="nav-item">
+                  <ul class="nav navbar-nav navbar-right">
+                    <li>
+                      <div class="btn-nav">
                         <form action="/logout" method="post">
                             <input type="hidden" name="_method" value="delete">
-                            <input type="submit" value="Logout">
+                            <input type="submit" class="btn btn-secondary" value="Logout">
                         </form>
+                      </div>
                     </li>
-                <% else %>
-                    <li class="nav-item">
-                    <a class="nav-link active fs-4" href="/signup">Sign Up</a>
-                    </li>
-                    <li class="nav-item">
-                    <a class="nav-link active fs-4" href="/login">Log In</a>
-                    </li>
-                <% end%>
-            </ul>
-
+                   </ul> 
+                <%end%>
             </div>
         </div>
     </nav>
 <!----------- END NAVBAR --------------->
 <!----------- START FLASH --------------->
-   <div class="text-danger">
+   <% if flash[:error] %>
+   <div class="alert alert-danger" role="alert">
     <%= flash[:error] %>
    </div>
+   <% end %>
 
-    <div class="text-success">
+  <% if flash[:message] %>
+    <div class="alert alert-success" role="alert">
     <%= flash[:message] %>
    </div>
+   <% end %>
 <!----------- END FLASH --------------->
-
+<br>
         <%= yield %>
 
       <footer class="branding">

@@ -28,9 +28,8 @@ class UsersController < ApplicationController
     end
 
     get '/user/:slug/edit' do
-        @user = User.find_by_slug(params[:slug])
-        redirect_if_not_authorized(@user)
-            erb :'/users/edit'
+        user_authorization
+        erb :'/users/edit'
     end
 
     patch '/user/:slug' do
@@ -52,18 +51,26 @@ class UsersController < ApplicationController
     end
 
     get '/user/:slug/delete' do
-        redirect_if_not_authorized(User.find_by_slug(params[:slug]))
-        @user = User.find_by_slug(params:slug)
+        user_authorization
         erb :'users/delete'
     end
 
     delete '/user/:slug/delete' do
-        redirect_if_not_authorized(User.find_by_slug(params[:slug]))
-        user = User.find_by_slug(params[:slug])
-        user.destroy
+        user_authorization
+        @user.destroy
         session.delete(:user_id)
         flash[:message] = "Your account has been deleted. We are sorry to see you go."
         redirect to "/"
+    end
+
+    private
+    def user_authorization
+        @user = User.find_by_slug(params[:slug]) 
+        #binding.pry
+        if @user.id != session[:user_id]
+            flash[:error] = "You are not authorized to make changes to this account"
+            redirect "/bats"
+        end
     end
 
 end

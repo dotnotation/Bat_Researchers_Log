@@ -30,12 +30,6 @@ class ApplicationController < Sinatra::Base
     def redirect_if_logged_in 
       redirect "/bats" if logged_in?
     end
-
-    def redirect_if_not_authorized(user)
-      if user.id != current_user.id
-        redirect "/bats"
-      end
-    end
   end
 
 end

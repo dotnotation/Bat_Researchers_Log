@@ -15,10 +15,11 @@ Updated at: <%= @bat.updated_at %><br>
 Notes: <%= @bat.notes %><br>
 
 <% if logged_in? && current_user.id == @bat.user_id %>
-    <a class="button" href="/bats/<%= @bat.identification %>/edit">Edit Bat</a>
+    <br>
+    <a class="btn btn-warning btn-sm active" href="/bats/<%= @bat.identification %>/edit">Edit Bat</a><br><br>
 
     <form action="/bats/<%= @bat.identification %>/delete" method="post">
         <input id ="hidden" type="hidden" name="_method" value="DELETE">
-        <input type="submit" value="Delete Bat">
+        <input type="submit" class="btn btn-danger btn-sm" value="Delete Bat">
     </form>
 <% end %>
