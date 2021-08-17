@@ -27,15 +27,18 @@ class UsersController < ApplicationController
     end
 
     patch '/user/:slug' do
-        # user = User.find_by_slug(params[:slug])
+        user = User.find_by_slug(params[:slug])
         # user.username = params[:username]
         # user.email = params[:email]
         # user.organization = params[:organization]
         # user.password = params[:password]
-        @user.update(params[:user])
-        if @user.save
+        
+        user.update(params[:user])
+        binding.pry
+        if user.save
             redirect to "/user/#{user.slug}"
         else
+            flash[:error] = "#{user.errors.full_messages.join(", ")}"
             redirect to "/user/#{user.slug}/edit"
         end
     end
