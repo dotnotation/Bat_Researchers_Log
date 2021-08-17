@@ -1,0 +1,6 @@
+<h1>Are you sure you want to delete your account?</h1>
+<h4>This action is permanent and can't be undone.</h4>
+    <form action="/user/<%= @user.slug %>/delete" method="post">
+        <input id ="hidden" type="hidden" name="_method" value="DELETE">
+        <input type="submit" value="Delete Account">
+    </form>

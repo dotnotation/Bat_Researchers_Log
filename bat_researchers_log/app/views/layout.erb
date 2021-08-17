@@ -27,7 +27,7 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <% if logged_in? %>
                     <li class="nav-item">
-                    <a class="nav-link active fs-4 " aria-current="page" href="/user">Account</a>
+                    <a class="nav-link active fs-4 " aria-current="page" href="/user/<%= current_user.slug %>">Account</a>
                     </li>
                     <li class="nav-item">
                     <a class="nav-link active fs-4" href="/bats">All Bats</a>
@@ -58,6 +58,10 @@
 <!----------- START FLASH --------------->
    <div class="text-danger">
     <%= flash[:error] %>
+   </div>
+
+    <div class="text-success">
+    <%= flash[:message] %>
    </div>
 <!----------- END FLASH --------------->
 

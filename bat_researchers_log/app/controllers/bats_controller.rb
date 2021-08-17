@@ -40,13 +40,13 @@ class BatsController < ApplicationController
 
     get '/bats/:identification' do
         @bat = Bat.find_by(identification: params[:identification]) 
-        erb :'bats/show'
+        if @bat
+            erb :'bats/show'
+        else
+            flash[:error] = "There is no bat with that identification in the database."
+            redirect to "/bats"
+        end
     end
-
-    # get '/bats/:slug' do
-    #     find_bat
-    #     erb :'/bats/show'
-    # end
 
     get '/bats/:identification/edit' do
         bat_authorization
@@ -60,8 +60,10 @@ class BatsController < ApplicationController
     patch '/bats/:identification' do
         bat_authorization
         if @bat.update(params[:bat])
+            flash[:message] = "Your bat has been updated."
             redirect to "/bats/#{@bat.identification}"
         else
+            flash[:error] = "#{@bat.errors.full_messages.join(", ")}"
             redirect to "/bats/#{@bat.identification}/edit"
         end
     end
@@ -69,7 +71,7 @@ class BatsController < ApplicationController
     delete '/bats/:identification/delete' do
         bat_authorization
         @bat.destroy
-
+        flash[:message] = "Your bat has been deleted from the database."
         redirect to "/bats"
     end
 
@@ -79,7 +81,7 @@ class BatsController < ApplicationController
         @bat = Bat.find_by(identification: params[:identification]) 
         #binding.pry
         if @bat.user_id != session[:user_id]
-        
+            flash[:error] = "You are not authorized to make changes to this bat."
             redirect "/bats"
         end
     end

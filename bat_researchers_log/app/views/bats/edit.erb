@@ -2,7 +2,7 @@
 <form action="/bats/<%= @bat.identification %>" method="post">
     <input id="hidden" type="hidden" name="_method" value="PATCH">
 
-    <label>Identification Number(either tag or wing print): </label>
+    <label>Identification Number(do not include spaces): </label>
     <input type="text" name="bat[identification]" value="<%= @bat.identification %>">
     
     <label>Nickname: </label>
@@ -11,13 +11,13 @@
     <label>Species: </label>
     <input type="text" name="bat[species]" value="<%= @bat.species %>"><br>
 
-    <label>Date Found: </label>
+    <label>Date Found(YYYY-MM-DD): </label>
     <input type="text" name="bat[date_found]" value="<%= @bat.date_found %>"><br>
     
     <label>Location: </label>
     <input type="text" name="bat[location]" value="<%= @bat.location %>"><br>
 
-    <label>Date Last Seen: </label>
+    <label>Date Last Seen(YYYY-MM-DD): </label>
     <input type="text" name="bat[date_last_seen]" value="<%= @bat.date_last_seen %>"><br>
 
     <label>Weight In Grams: </label>

@@ -17,7 +17,12 @@ class UsersController < ApplicationController
 
     get '/user/:slug' do
         @user = User.find_by_slug(params[:slug])
-        erb :'/users/show'
+        if @user
+            erb :'/users/show'
+        else
+            flash[:error] = "We are unable to find that user. Please try again."
+            redirect to "/bats"
+        end
     end
 
     get '/user/:slug/edit' do
@@ -36,6 +41,7 @@ class UsersController < ApplicationController
         user.update(params[:user])
         #binding.pry
         if user.save
+            flash[:message] = "Your account has been updated."
             redirect to "/user/#{user.slug}"
         else
             flash[:error] = "#{user.errors.full_messages.join(", ")}"
@@ -54,6 +60,7 @@ class UsersController < ApplicationController
         user = User.find_by_slug(params[:slug])
         user.destroy
         session.delete(:user_id)
+        flash[:message] = "Your account has been deleted. We are sorry to see you go."
         redirect to "/"
     end
 
