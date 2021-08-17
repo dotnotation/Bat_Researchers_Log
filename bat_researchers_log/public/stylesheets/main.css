@@ -12,17 +12,20 @@
   }
 
   /* --- Welcome Page Styles --- */
-  body {
-    background-image: url("../images/batground.png");
+
+  .page-bg{
+    background-image: url("../images/batground.jpg");
     background-color: black;
-    color: white;
+  }
+
+  body {
     font-family: Sans-Serif;
     line-height: 18px;
   }
 
   .wrapper {
-    background-image: url("../images/batground.png");
-    background: black;
+    background: transparent;
+    color: white;
     -moz-box-shadow: 0 0 10px rgba(0,0,0,.3);
     -webkit-box-shadow: 0 0 10px rgba(0,0,0,.3);
     box-shadow: 0 0 10px rgba(0,0,0,.3);
@@ -119,5 +122,7 @@
 .nav-bar{
   color: white;
 }
+
+
 
 
