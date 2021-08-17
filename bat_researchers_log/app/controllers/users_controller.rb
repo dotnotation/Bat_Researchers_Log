@@ -7,10 +7,12 @@ class UsersController < ApplicationController
 
     post '/signup' do
         user = User.new(params[:user])
+        #binding.pry
         if user.save
             session[:user_id] = user.id 
             redirect to "/bats"
         else
+            flash[:error] = "#{user.errors.full_messages.join(", ")}"
             redirect to "/signup"
         end
     end
@@ -55,7 +57,7 @@ class UsersController < ApplicationController
         erb :'users/delete'
     end
 
-    delete '/user/:slug' do
+    delete '/user/:slug/delete' do
         redirect_if_not_authorized(User.find_by_slug(params[:slug]))
         user = User.find_by_slug(params[:slug])
         user.destroy
