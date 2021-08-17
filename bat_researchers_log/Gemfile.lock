@@ -55,6 +55,7 @@ GEM
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
     rake (13.0.6)
+    regex (1.1.1)
     regexp_parser (2.1.1)
     require_all (3.0.0)
     ripl (0.7.1)
@@ -119,6 +120,7 @@ DEPENDENCIES
   rack-flash3 (~> 1.0)
   rack-test
   rake
+  regex (~> 1.1, >= 1.1.1)
   require_all
   rspec
   shotgun

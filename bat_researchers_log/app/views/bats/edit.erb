@@ -2,11 +2,11 @@
 <form action="/bats/<%= @bat.identification %>" method="post">
     <input id="hidden" type="hidden" name="_method" value="PATCH">
 
-    <label>Identification Number(do not include spaces): </label>
-    <input type="text" name="bat[identification]" value="<%= @bat.identification %>">
+    <label>Tag Or Wing Print Number (do not include spaces):</label>
+    <input type="text" name="bat[identification]" value="<%= @bat.identification %>"><br>
     
     <label>Nickname: </label>
-    <input type="text" name="bat[nickname]" value="<%= @bat.nickname %>">
+    <input type="text" name="bat[nickname]" value="<%= @bat.nickname %>"><br>
 
     <label>Species: </label>
     <input type="text" name="bat[species]" value="<%= @bat.species %>"><br>

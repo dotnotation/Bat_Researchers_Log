@@ -1,18 +1,18 @@
 <h3><%= @bat.identification %></h3>
-Nickname: <%= @bat.nickname %><br>
-Species: <%= @bat.species %><br>
-Date Found: <%= @bat.date_found %><br>
-Location: <%= @bat.location %><br>
-Date Last Seen: <%= @bat.date_last_seen %><br>
-Weight In Grams: <%= @bat.weight %><br>
-Age In Years: <%= @bat.age %><br>
-Sex: <%= @bat.sex %><br>
-Wing Span In CM: <%= @bat.wing_span %><br>
-Colony Size: <%= @bat.colony_size %><br>
-Conservation Status: <%= @bat.conservation_status %><br>
-Presence of White Nose Syndrom: <%= @bat.white_nose_syndrome %><br>
-Updated at: <%= @bat.updated_at %><br>
-Notes: <%= @bat.notes %><br>
+<b>Nickname:</b> <%= @bat.nickname %><br>
+<b>Species:</b> <%= @bat.species %><br>
+<b>Date Found:</b> <%= @bat.date_found %><br>
+<b>Location:</b> <%= @bat.location %><br>
+<b>Date Last Seen:</b> <%= @bat.date_last_seen %><br>
+<b>Weight In Grams:</b> <%= @bat.weight %><br>
+<b>Age In Years:</b> <%= @bat.age %><br>
+<b>Sex:</b> <%= @bat.sex %><br>
+<b>Wing Span In CM:</b> <%= @bat.wing_span %><br>
+<b>Colony Size:</b> <%= @bat.colony_size %><br>
+<b>Conservation Status:</b> <%= @bat.conservation_status %><br>
+<b>Presence of White Nose Syndrom:</b> <%= @bat.white_nose_syndrome %><br>
+<b>Updated at:</b> <%= @bat.updated_at %><br>
+<b>Notes:</b> <%= @bat.notes %><br>
 
 <% if logged_in? && current_user.id == @bat.user_id %>
     <br>

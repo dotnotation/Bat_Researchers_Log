@@ -11,21 +11,6 @@ class BatsController < ApplicationController
     end
 
     post '/bats' do
-        # @bat = Bat.create(identification: params[:identification],
-        #                                 nickname: params[:nickname],
-        #                                 species: params[:species],
-        #                                 date_found: params[:date_found],
-        #                                 location: params[:location],
-        #                                 date_last_seen: params[:date_last_seen],
-        #                                 weight: params[:weight],
-        #                                 age: params[:age],
-        #                                 sex: params[:sex],
-        #                                 wing_span: params[:wing_span],
-        #                                 colony_size: params[:colony_size],
-        #                                 conservation_status: params[:conservation_status],
-        #                                 white_nose_syndrome: params[:white_nose_syndrome],
-        #                                 notes: params[:notes],
-        #                                 user_id: current_user.id)
         bat = current_user.bats.build(params[:bat])
         #binding.pry
 
