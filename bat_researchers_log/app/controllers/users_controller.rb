@@ -34,7 +34,7 @@ class UsersController < ApplicationController
         # user.password = params[:password]
         
         user.update(params[:user])
-        binding.pry
+        #binding.pry
         if user.save
             redirect to "/user/#{user.slug}"
         else
