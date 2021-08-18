@@ -34,10 +34,6 @@ class UsersController < ApplicationController
 
     patch '/user/:slug' do
         user = User.find_by_slug(params[:slug])
-        # user.username = params[:username]
-        # user.email = params[:email]
-        # user.organization = params[:organization]
-        # user.password = params[:password]
         
         user.update(params[:user])
         #binding.pry
