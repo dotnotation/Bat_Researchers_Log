@@ -44,6 +44,7 @@ class BatsController < ApplicationController
 
     patch '/bats/:identification' do
         bat_authorization
+        #binding.pry
         if @bat.update(params[:bat])
             flash[:message] = "Your bat has been updated."
             redirect to "/bats/#{@bat.identification}"
