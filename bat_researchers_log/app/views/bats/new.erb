@@ -36,8 +36,12 @@
     <label>Conservation Status: </label>
     <input type="text" name="bat[conservation_status]"><br>
 
-    <label>Presence of White Nose Syndrome (true/false): </label>
-    <input type="text" name="bat[white_nose_syndrome]"><br>
+    <label>Presence of White Nose Syndrome:</label>
+      <label>True</label>
+      <input type="radio" name="bat[white_nose_syndrome]" value="true">
+
+      <label>False </label>
+      <input type="radio" name="bat[white_nose_syndrome]" value="false"><br>
 
     <label>Notes: </label>
     <textarea type="text" name="bat[notes]"></textarea><br>
