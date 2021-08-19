@@ -1,6 +1,9 @@
 <h3><%= @user.username %></h3>
+
 Email: <%= @user.email %><br>
+
 Organization: <%= @user.organization %><br>
+
 Bats: 
     <ol>
         <% @user.bats.all.each do |bat| %>
