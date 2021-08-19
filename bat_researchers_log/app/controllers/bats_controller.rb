@@ -12,7 +12,6 @@ class BatsController < ApplicationController
 
     post '/bats' do
         bat = current_user.bats.build(params[:bat])
-        #binding.pry
 
         if bat.save
             flash[:message] = "Bat successfully created."
@@ -44,7 +43,6 @@ class BatsController < ApplicationController
 
     patch '/bats/:identification' do
         bat_authorization
-        #binding.pry
         if @bat.update(params[:bat])
             flash[:message] = "Your bat has been updated."
             redirect to "/bats/#{@bat.identification}"
@@ -65,7 +63,6 @@ class BatsController < ApplicationController
    
     def bat_authorization
         @bat = Bat.find_by(identification: params[:identification]) 
-        #binding.pry
         if @bat.user_id != session[:user_id]
             flash[:error] = "You are not authorized to make changes to this bat."
             redirect "/bats"

@@ -7,7 +7,7 @@ class UsersController < ApplicationController
 
     post '/signup' do
         user = User.new(params[:user])
-        #binding.pry
+
         if user.save
             session[:user_id] = user.id 
             redirect to "/bats"
@@ -36,7 +36,7 @@ class UsersController < ApplicationController
         user = User.find_by_slug(params[:slug])
         
         user.update(params[:user])
-        #binding.pry
+        
         if user.save
             flash[:message] = "Your account has been updated."
             redirect to "/user/#{user.slug}"
@@ -62,7 +62,7 @@ class UsersController < ApplicationController
     private
     def user_authorization
         @user = User.find_by_slug(params[:slug]) 
-        #binding.pry
+     
         if @user.id != session[:user_id]
             flash[:error] = "You are not authorized to make changes to this account"
             redirect "/bats"
