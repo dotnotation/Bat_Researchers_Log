@@ -1,7 +1,13 @@
 class BatsController < ApplicationController
 
     get '/bats' do
-        @bats = Bat.all
+        #@bats = Bat.all
+        species = params[:species]
+        if species
+            @bats = Bat.where(species: species)
+        else
+            @bats = Bat.all
+        end
         erb :'/bats/index'
     end
 
